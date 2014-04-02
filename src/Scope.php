@@ -109,9 +109,13 @@ class Scope
      */
     public function toArray()
     {
-        $output = array(
-            'data' => $this->runAppropriateTransformer()
-        );
+        if (empty($this->parentScopes)) {
+            $output = array(
+                'data' => $this->runAppropriateTransformer()
+            );
+        } else {
+            $output = $this->runAppropriateTransformer();
+        }
 
         if ($this->availableEmbeds) {
             $output['embeds'] = $this->availableEmbeds;
